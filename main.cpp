@@ -28,6 +28,7 @@ int getIthFibNumberRecur(int fibNumber) {
 
 int& fallOffTheStack(const int value) {
     int myVal = value;
+    cout << "Returning reference to " << value << endl;
     return myVal;
 }
 
@@ -36,7 +37,7 @@ int main() {
     cout << "Was " << willChange << endl;
     fallOffTheStack(10);
     cout << "Now " << willChange << endl;
-    
+
     assert(getIthFibNumberIter(2) == 1);
     assert(getIthFibNumberRecur(2) == 1);
 
