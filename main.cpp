@@ -23,7 +23,8 @@ int getIthFibNumberRecur(int fibNumber) {
     if ( fibNumber <= 2) {
         return 1;
     }
-    return getIthFibNumberRecur(fibNumber-2) + getIthFibNumberRecur(fibNumber-1);
+    return getIthFibNumberRecur(fibNumber-1) +
+           getIthFibNumberRecur(fibNumber-2);
 }
 
 int& fallOffTheStack(const int value) {
@@ -32,7 +33,30 @@ int& fallOffTheStack(const int value) {
     return myVal;
 }
 
+void swapWithoutTemp(int first, int second) {
+    int myArray[2];
+    myArray[0] = first;
+    myArray[1] = second;
+    myArray[0] += myArray[1];
+    myArray[1] = myArray[0] - myArray[1];
+    myArray[0] -= myArray[1];
+
+    assert(myArray[0]==second);
+    assert(myArray[1]==first);
+}
+
 int main() {
+    // swapWithoutTemp
+    char myCharArray[5] = {'a', 'b', 'c', 'd', '\0'};
+    char* myOtherCharArray = "abcd";
+
+    cout << myCharArray << endl << myOtherCharArray << endl;
+
+    swapWithoutTemp(4000000000, 1999999999);
+    swapWithoutTemp(50, 51);
+    swapWithoutTemp(-1, -4);
+
+
     int& willChange = fallOffTheStack(5);
     cout << "Was " << willChange << endl;
     fallOffTheStack(10);
@@ -45,13 +69,13 @@ int main() {
     assert(getIthFibNumberRecur(3) == 2);
 
     assert(getIthFibNumberIter(4) == 3);
-    assert(getIthFibNumberIter(4) == 3);
+    assert(getIthFibNumberRecur(4) == 3);
 
     assert(getIthFibNumberIter(5) == 5);
-    assert(getIthFibNumberIter(5) == 5);
+    assert(getIthFibNumberRecur(5) == 5);
 
     assert(getIthFibNumberIter(20) == 6765);
-    assert(getIthFibNumberIter(20) == 6765);
+    assert(getIthFibNumberRecur(20) == 6765);
 
     return 0;
 }
